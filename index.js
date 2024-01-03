@@ -2,24 +2,22 @@ require('dotenv').config();
 var express = require('express');
 var os = require('os');
 var app = express();
+const eLayouts = require("express-ejs-layouts")
 
-// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
-// so that your API is remotely testable by FCC
-var cors = require('cors');
-const internal = require('stream');
-app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
+app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views')
+app.set('layout', 'layout')
+app.use(eLayouts)
 
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.render("index.ejs")
 });
 
 
 app.get("/api/whoami/", function (req, res) {
-
+//console.log("os.networkinterfaces", os.networkInterfaces())
   let data = os.networkInterfaces();
   let addr = [];
   let address ;
@@ -33,11 +31,12 @@ app.get("/api/whoami/", function (req, res) {
       }
     }
   }
-  console.log('addr', addr)
+  //console.log('addr', addr)
   if(addr.length == 0 ) address = req.ip ;
   else   address = ` { ${addr.join(" ; ")} }`;
 
-  res.json({ipaddress: address , language: req.headers["accept-language"], software: req.headers["user-agent"]});
+  let answer  = {ipaddress: address , language: req.headers["accept-language"], software: req.headers["user-agent"]};
+  res.render('whoami', { answer: answer })
 });
 
 // listen for requests 
