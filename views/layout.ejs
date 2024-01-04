@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header Parser Microservice</title>
     <link rel="stylesheet" href="/style.css" type="text/css">
 </head>
-<body>
-    <nav class="row">
-        <ul class="row">
-            <li> <a href="/">HOME</a> </li>
-            <li> <a href="/api/whoami/"> WHO AM I</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-    <h1>Request Header Parser Microservice</h1>
 
-    <%- body %>
-    </div>    
+<body>
+    <div class="grid row">
+        <nav>
+            <ul class="column">
+                <li> <a href="/" class="bold">HOME</a> </li>
+                <li> <a href="/api/whoami/" class="bold"> WHO AM I</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+            <h1>Request Header Parser Microservice</h1>
+
+            <%- body %>
+        </div>
+    </div>
+
     <div class="footer">
-        
-           <a href="https://www.freecodecamp.org">freeCodeCamp</a>
-        
+
+        <a href="https://www.freecodecamp.org">freeCodeCamp</a>
+
     </div>
 </body>
+
 </html>
